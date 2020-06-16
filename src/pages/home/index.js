@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Row, Col, Table, } from 'antd';
-import './index.sass'
+import { Row, Col, Table, Button } from 'antd';
+import './index.scss'
 import { fruitsApi } from '../../services'
-
-
+import { connect } from 'react-redux'
+import { logout } from '../../actions'
 const columns = [
     {
         title: '名称',
@@ -23,11 +23,10 @@ const columns = [
     },
 ];
 
-export default class index extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: false,
             pagination: {
                 total: 0,
                 page: 1,
@@ -45,12 +44,10 @@ export default class index extends Component {
         fruitsApi.getFruitList(page)
             .then(res => {
                 if (res && res.status === 200) {
-                    this.setState({ isLoading: true })
                     this.setState({
                         pagination: res.data.data.pagination,
                         fruits: res.data.data.fruits,
                     })
-                    this.setState({ isLoading: false })
                 }
             })
             .catch(err => {
@@ -61,16 +58,21 @@ export default class index extends Component {
         this.getData(page);
     }
     render() {
-        const { fruits, isLoading, pagination } = this.state;
+        const { fruits, pagination } = this.state;
+        const { logout } = this.props;
         return (
             <>
-                <Row className="root" >
+                <Row className="root">
+                    <Col span={12} offset={6} className="login-btn">
+                        <Button type="primary" onClick={logout}>退出登录</Button>
+                    </Col>
+                </Row>
+                <Row >
                     <Col span={12} offset={6}>
                         <Table
                             columns={columns}
                             dataSource={fruits}
                             bordered={false}
-                            loading={isLoading}
                             pagination={
                                 {
                                     defaultCurrent: 1,
@@ -87,3 +89,5 @@ export default class index extends Component {
     }
 }
 
+
+export default connect(null, { logout })(Home);

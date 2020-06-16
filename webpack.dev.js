@@ -13,7 +13,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.sass?$/,
+                test: /\.scss?$/,
                 include: path.resolve(__dirname, './src'),
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
@@ -35,6 +35,8 @@ module.exports = {
         open: true,
         port: 3000,
         hot: true,//不支持热跟新的情况下会自动刷新页面
+        // 路由设置
+        historyApiFallback: true,
         proxy: {
             '/api': {
                 target: 'http://localhost:3001',

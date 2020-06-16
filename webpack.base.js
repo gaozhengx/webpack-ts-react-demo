@@ -2,7 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: ['babel-polyfill', './src/index.js'],
     module: {
         rules: [
             {
@@ -70,7 +70,7 @@ module.exports = {
                                         chrome: '67',
                                         safari: '11.1',
                                     },
-                                    corejs: 3,
+                                    corejs: 2,
                                     useBuiltIns: 'usage'//按需注入
                                 }
                             ],
