@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Input } from 'antd';
+import './index.scss'
 const { Search } = Input;
 
 export default class App extends React.Component<any, any> {
@@ -12,7 +13,7 @@ export default class App extends React.Component<any, any> {
                 <Search
                     placeholder="搜索类别"
                     onSearch={(v) => handleSearchChange(v)}
-                    style={{ width: 400 }}
+                    className="search"
                     enterButton="搜索"
                 />
             </>
