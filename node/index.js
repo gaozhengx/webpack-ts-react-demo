@@ -8,6 +8,7 @@ const mongo = require('./db')
 app.get('/api/list', async (req, res) => {
     // 分⻚页查询
     const { page } = req.query
+    // 获取到集合
     const col = mongo.col('fruits')
     // 看看总件数
     const total = await col.find().count()
@@ -34,15 +35,21 @@ app.get('/api/list', async (req, res) => {
 })
 
 // 查询分类
-
 app.get('/api/category', async (req, res) => {
     const col = mongo.col('fruits');
-    //分组
-    const data = await col.distinct('category');
+    const { category } = req.query;
+    const fruits = await col.find({ category: category }).toArray();
     res.json(
         {
-            ok: 1,
-            data
+            status: 'SUCCEED',
+            data: {
+                fruits,
+                pagination: {
+                    total: fruits.length,
+                    page: 1,
+                    pageSize: fruits.length
+                }
+            }
         }
     )
 })

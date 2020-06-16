@@ -13,4 +13,8 @@ export const fruitsApi = {
     getFruitList: (page:number) => {
         return service.get(`/api/list?page=${page}`);
     },
+
+    searchFruitByCategory: (v: string) => {
+        return service.get(`/api/category?category=${v}`);
+    }
 }

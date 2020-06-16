@@ -4,6 +4,7 @@ import './index.scss'
 import { fruitsApi } from '../../services'
 import { connect } from 'react-redux'
 import { logout } from '../../actions/actionCreators'
+import Search from './Search'
 
 const columns = [
     {
@@ -56,9 +57,27 @@ class Home extends Component<any, any> {
                 console.log(err)
             })
     }
-    handleChange(page: number) {
+
+    handlePageChange = (page: number) => {
         this.getData(page);
     }
+
+    handleSearchChange = (value: string) => {
+        fruitsApi.searchFruitByCategory(value)
+            .then(res => {
+                if (res && res.status === 200) {
+                    console.log(res.data.data)
+                    this.setState({
+                        pagination: res.data.data.pagination,
+                        fruits: res.data.data.fruits,
+                    })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     render() {
         const { fruits, pagination } = this.state;
         const { logout } = this.props;
@@ -66,7 +85,8 @@ class Home extends Component<any, any> {
             <>
                 <Row className="root">
                     <Col span={12} offset={6} className="login-btn">
-                        <Button type="primary" onClick={logout}>退出登录</Button>
+                        <Search handleSearchChange={this.handleSearchChange} />
+                        <Button type="primary" onClick={logout} >退出登录</Button>
                     </Col>
                 </Row>
                 <Row >
@@ -80,7 +100,7 @@ class Home extends Component<any, any> {
                                     defaultCurrent: 1,
                                     pageSize: pagination.pageSize,
                                     total: pagination.total,
-                                    onChange: this.handleChange.bind(this)
+                                    onChange: this.handlePageChange
                                 }
                             }
                         />
