@@ -1,7 +1,8 @@
-import actionTypes from '../actions/actionTypes'
+import actionTypes from './actionTypes'
 
+// 使用定时器模拟ajax请求
 export const login = () => {
-    return dispatch => {
+    return (dispatch: Function) => {
         dispatch(toggleSpinner());
         setTimeout(() => {
             dispatch({ type: actionTypes.LOGINSUCCESS });
@@ -10,7 +11,7 @@ export const login = () => {
     }
 }
 export const logout = () => {
-    return dispatch => {
+    return (dispatch: Function) => {
         dispatch(toggleSpinner());
         setTimeout(() => {
             dispatch({ type: actionTypes.LOGINFAILURE });

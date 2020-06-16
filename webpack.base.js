@@ -2,7 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: path.resolve(__dirname, './src/index.tsx'),
     module: {
         rules: [
             {
@@ -43,15 +43,6 @@ module.exports = {
                     }
                 }
             },
-            // {
-            //     text: /\.(eot|ttf|woff|woff2)$/,
-            //     use: {
-            //         loader: 'file-loader',
-            //         options: {
-            //             name: '[name].[ext]'
-            //         }
-            //     }
-            // },
             {
                 test: /.\js|jsx$/,
                 exclude: /node_modules/,
@@ -78,6 +69,11 @@ module.exports = {
                         ]
                     }
                 }
+            },
+            {
+                test: /\.tsx?$/,
+                use: ['babel-loader', 'ts-loader'],
+                exclude: /node_modules/,
             }
         ]
     },
@@ -90,10 +86,14 @@ module.exports = {
             react: path.resolve(__dirname, "./node_modules/react/umd/react.production.min.js"),
             "react-dom": path.resolve(__dirname, "./node_modules/react-dom/umd/react-dom.production.min.js"),
         },
-        extensions: ['.js', 'jsx', 'ts']
+        extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
         // 删除每次打包的文件
         new CleanWebpackPlugin(),
-    ]
+    ],
+    // 关闭警告
+    performance: {
+        hints: false
+    }
 }

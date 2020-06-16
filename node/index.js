@@ -47,4 +47,4 @@ app.get('/api/category', async (req, res) => {
     )
 })
 
-app.listen(3001)
+app.listen(8000)

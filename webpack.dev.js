@@ -39,7 +39,7 @@ module.exports = {
         historyApiFallback: true,
         proxy: {
             '/api': {
-                target: 'http://localhost:3001',
+                target: 'http://localhost:8000',
                 // 是否需要跨域
                 // changeOrigin: true
             }

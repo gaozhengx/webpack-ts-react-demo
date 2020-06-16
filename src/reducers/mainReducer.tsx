@@ -1,12 +1,22 @@
 import actionTypes from '../actions/actionTypes'
 
-const initState = {
+interface Iactions {
+    type: string,
+    value?: any,
+}
+
+export interface Istate {
+    isLoading: boolean,
+    isLogin: boolean
+}
+
+const initState: Istate = {
     isLoading: false,
     isLogin: false,
 }
 
 
-const mainReducer = (state = initState, action) => {
+const mainReducer = (state = initState, action: Iactions): Istate => {
     switch (action.type) {
         case actionTypes.LOGINSUCCESS:
             return { ...state, isLogin: true };

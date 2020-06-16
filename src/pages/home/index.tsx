@@ -3,13 +3,14 @@ import { Row, Col, Table, Button } from 'antd';
 import './index.scss'
 import { fruitsApi } from '../../services'
 import { connect } from 'react-redux'
-import { logout } from '../../actions'
+import { logout } from '../../actions/actionCreators'
+
 const columns = [
     {
         title: '名称',
         dataIndex: 'name',
         key: 'name',
-        render: text => <a>{text}</a>,
+        render: (text: string) => <a>{text}</a>,
     },
     {
         title: '价格',
@@ -23,8 +24,9 @@ const columns = [
     },
 ];
 
-class Home extends Component {
-    constructor(props) {
+
+class Home extends Component<any, any> {
+    constructor(props: any) {
         super(props);
         this.state = {
             pagination: {
@@ -40,7 +42,7 @@ class Home extends Component {
         this.getData(this.state.pagination.page);
     }
 
-    getData(page) {
+    getData(page: number) {
         fruitsApi.getFruitList(page)
             .then(res => {
                 if (res && res.status === 200) {
@@ -54,7 +56,7 @@ class Home extends Component {
                 console.log(err)
             })
     }
-    handleChange(page, pageSize) {
+    handleChange(page: number) {
         this.getData(page);
     }
     render() {

@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Button } from 'antd'
 import './index.scss'
 import { connect } from 'react-redux'
-import { login } from '../../actions'
+import { login } from '../../actions/actionCreators'
 import { Redirect } from 'react-router-dom'
-class Login extends Component {
+import { storeState } from '../../store'
+
+class Login extends Component<any, storeState> {
 
     render() {
-        
+
         const { login, isLogin } = this.props;
 
         if (isLogin) {
@@ -28,7 +30,7 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: storeState) => ({
     isLogin: state.mainReducer.isLogin
 })
 
