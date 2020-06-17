@@ -11,7 +11,7 @@ export default class App extends React.Component<any, any> {
         return (
             <>
                 <Search
-                    placeholder="搜索类别"
+                    placeholder="请输入种类"
                     onSearch={(v) => handleSearchChange(v)}
                     className="search"
                     enterButton="搜索"

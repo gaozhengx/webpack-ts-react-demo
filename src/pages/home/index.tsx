@@ -66,7 +66,6 @@ class Home extends Component<any, any> {
         fruitsApi.searchFruitByCategory(value)
             .then(res => {
                 if (res && res.status === 200) {
-                    console.log(res.data.data)
                     this.setState({
                         pagination: res.data.data.pagination,
                         fruits: res.data.data.fruits,

@@ -40,6 +40,7 @@ module.exports = {
         proxy: {
             '/api': {
                 target: 'http://localhost:8000',
+                // target:'http://47.114.50.61:8001'
                 // 是否需要跨域
                 // changeOrigin: true
             }
